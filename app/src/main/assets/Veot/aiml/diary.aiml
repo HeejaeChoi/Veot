@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- add diary -->
+    <category>
+        <pattern>START DIARY</pattern>
+        <template>
+            오늘의 일기를 작성해드릴게요. 오늘 하루는 어떠셨나요? 힘든 일이 있었나요?
+            <think>
+                <set name = "topic">diary</set>
+                <set name = "hardtimes">NULL</set>
+                <set name = "goodtimes">NULL</set>
+            </think>
+        </template>
+    </category>
+  
+    <category>
+        <pattern>일기추가 ^</pattern>
+        <template><srai>START DIARY</srai></template>
+    </category>
+    
+    <category>
+        <pattern>일기 추가 ^</pattern>
+        <template><srai>START DIARY</srai></template>
+    </category>
+
+<topic name = "diary">
+    <!--hard times-->
+    <category>
+        <pattern>*</pattern>
+        <that>힘든 일이 있었나요</that>
+        <template>
+            그랬군요ᅲᅲ 많이 힘드셨죠... 그럼 즐거운 일은 있었나요?
+            <think>
+                <set name = "hardtimes"><star/></set>
+            </think>
+        </template>
+    </category>
+
+    <category>
+        <pattern>아니 ^</pattern>
+        <that>힘든 일이 있었나요</that>
+        <template>없었다면 다행이에요. 그럼 즐거운 일은 있었나요?</template>
+    </category>
+
+    <!--good times-->
+    <category>
+        <pattern>*</pattern>
+        <that>그럼 즐거운 일은 있었나요</that>
+        <template>
+            그랬군요. 좋은 하루를 보내신 것 같아요.
+            <think>
+                <set name = "goodtimes"><star/></set>
+            </think>
+            <srai>COMPLETE DIARY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>아니 ^</pattern>
+        <that>그럼 즐거운 일은 있었나요</that>
+        <template>
+            그렇군요. 그래도 내일은 좋은 일이 있길 바래요.
+            <srai>COMPLETE DIARY</srai>
+            </template>
+    </category>
+    
+    <!--complete diary. obb-->
+    <category>
+        <pattern>COMPLETE DIARY</pattern>
+        <template>OOB/DIARY/<get name = "hardtimes"/>/<get name = "goodtimes"/></template>
+    </category>
+</topic>
+
+</aiml>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    
+<!-- UDC -->
+<category>
+    <pattern>*</pattern>
+    <template>다시 시도해주세요.</template>
+</category>
+  
+<!-- GREETING -->
+<category>
+  <pattern>XSTART</pattern>
+  <template>
+      <random>
+          <li>반가워요</li>
+          <li>안녕하세요</li>
+      </random>
+  </template>
+</category>
+
+<!--choose a menu-->
+<category>
+    <pattern>XMENU</pattern>
+    <template>메뉴를 선택해주세요.
+일정 추가 / 일정 검색 / 일기 추가
+    </template>
+</category>
+
+<!-- complete a action -->
+<category>
+  <pattern>XDONE</pattern>
+  <template>다른 일을 도와드릴까요?</template>
+</category>
+
+</aiml>

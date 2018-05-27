@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    
+<!-- search schedule -->
+    <category>
+        <pattern>일정 검색 ^</pattern>
+        <template>
+            검색할 날짜를 입력해주세요.
+            <think>
+                <set name = "searchmonth">NULL</set>
+                <set name = "searchdate">NULL</set>
+                <set name = "searchweek">NULL</set>
+                <set name = "searchday">NULL</set>
+            </think>
+        </template>
+    </category>
+
+    <category>
+        <pattern><set>thisdate</set> ^</pattern>
+        <that>검색할 날짜를 입력해주세요</that>
+        <template>
+            <star/> 일정을 검색해 드릴게요.
+            <think>
+                <set name = "searchmonth">this</set>
+                <set name = "searchdate">NULL</set>
+                <set name = "searchweek">NULL</set>
+                <set name = "searchday"><map name = "this2date"><star/></map></set>
+            </think>
+            <srai>COMPLETE SEARCH</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern><set>date</set> ^</pattern>
+        <that>검색할 날짜를 입력해주세요</that>
+        <template>
+            이번 달 <star/> 일정을 검색해 드릴게요.
+            <think>
+                <set name = "searchmonth">this</set>
+                <set name = "searchdate"><map name = "date2num"><star/></map></set>
+                <set name = "searchweek">NULL</set>
+                <set name = "searchday">NULL</set>
+            </think>
+            <srai>COMPLETE SEARCH</srai>
+        </template>
+    </category>
+  
+    <category>
+        <pattern> * <set>date</set> ^</pattern>
+        <that>검색할 날짜를 입력해주세요</that>
+        <template>
+            <star index = "1"/> <star index = "2"/> 일정을 검색해 드릴게요.
+            <think>
+                <set name = "searchmonth"><map name = "this2month"><star index = "1"/></map></set>
+                <set name = "searchdate"><map name = "date2num"><star index = "2"/></map></set>
+                <set name = "searchweek">NULL</set>
+                <set name = "searchday">NULL</set>
+            </think>
+            <srai>COMPLETE SEARCH</srai>
+        </template>
+    </category>
+    
+    <category>
+        <pattern> * <set>day</set> ^</pattern>
+        <that>검색할 날짜를 입력해주세요</that>
+        <template>
+            <star index = "1"/> <star index = "2"/> 일정을 검색해 드릴게요.
+            <think>
+                <set name = "searchmonth">NULL</set>
+                <set name = "searchdate">NULL</set>
+                <set name = "searchweek"><map name = "this2week"><star index = "1"/></map></set>
+                <set name = "searchday"><map name = "day2num"><star index = "2"/></map></set>
+            </think>
+            <srai>COMPLETE SEARCH</srai>
+        </template>
+    </category>
+    
+    <category>
+        <pattern><set>day</set> ^</pattern>
+        <that>검색할 날짜를 입력해주세요</that>
+        <template> 이번 주 <star/> 일정을 검색해 드릴게요.
+            <think>
+                <set name = "searchmonth">NULL</set>
+                <set name = "searchdate">NULL</set>
+                <set name = "searchweek">this</set>
+                <set name = "searchday"><map name = "day2num"><star/></map></set>
+            </think>
+            <srai>COMPLETE SEARCH</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>COMPLETE SEARCH</pattern>
+        <template>OOB/SEARCH/<get name = "searchmonth"/>/<get name = "searchdate"/>/<get name = "searchweek"/>/<get name = "searchday"/></template>
+    </category>
+</aiml>

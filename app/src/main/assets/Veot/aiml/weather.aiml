@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+  
+<!--search weather-->
+  <category>
+      <pattern><set>thisdate</set> 날씨 ^</pattern>
+      <template>
+          <star/> 날씨를 알려 드릴게요.
+          <think>
+              <set name = "weatherdate"><map name = "date2num"><star/></map></set>
+          </think>
+          <srai>SEARCH WEATHER</srai>
+      </template>
+  </category>
+  
+  <category>
+      <pattern>SEARCH WEATHER</pattern>
+      <template>
+          <think>
+              <oob><weather>
+                  <weatherdate><get name = "weatherdate"></get></weatherdate>
+              </weather></oob>
+          </think>
+          <srai>XDONE</srai>
+      </template>
+  </category>
+</aiml>

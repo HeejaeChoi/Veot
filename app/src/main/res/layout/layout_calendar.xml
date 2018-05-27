@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:theme="@style/CalenderViewCustom">
+    </CalendarView>
+
+    <TextView
+        android:id="@+id/button_today_calendar"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="310dp"
+        android:gravity="center"
+        android:text="TODAY"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp"
+        android:clickable="true"/>
+</FrameLayout>

@@ -1,0 +1,6 @@
+이번주:this
+이번 주:this
+다음주:next
+다음 주:next
+다다음주:afternext
+다다음 주:afternext

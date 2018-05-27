@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!--add schedule-->
+    <category>
+        <pattern>START SCHEDULE</pattern>
+        <template> 
+            일정을 등록해드릴게요. 어떤 날짜의 일정인가요?
+            <think>
+                <set name = "topic">schedule</set>
+                <set name = "month">NULL</set>
+                <set name = "date">NULL</set>
+                <set name = "day">NULL</set>
+                <set name = "week">NULL</set>
+                <set name = "starthour">NULL</set>
+                <set name = "startminute">NULL</set>
+                <set name = "endhour">NULL</set>
+                <set name = "endminute">NULL</set>
+                <set name = "title">NULL</set>
+                <set name = "notihour">0</set>
+                <set name = "notiminute">0</set>
+            </think>
+        </template>
+    </category>
+  
+    <category>
+        <pattern>일정추가 ^</pattern>
+        <template><srai>START SCHEDULE</srai></template>
+    </category>
+    
+    <category>
+        <pattern>일정 추가 ^</pattern>
+        <template><srai>START SCHEDULE</srai></template>
+    </category>
+
+  
+<topic name = "schedule">
+    <category>
+        <pattern>ANSWER DATE</pattern>
+        <that>어떤 날짜의 일정인가요</that>
+        <template>시작 시간을 설정하시겠어요?</template>
+    </category>
+    
+    <category>
+        <pattern> * <set>date</set> ^</pattern>
+        <that>어떤 날짜의 일정인가요</that>
+        <template>
+            <think>
+                <set name = "month"><map name = "month2num"><star index = "1"></star></map></set>
+                <set name = "date"><map name = "date2num"><star index = "2"></star></map></set>
+            </think>
+            <srai>ANSWER DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern><set>date</set> ^</pattern>
+        <that>어떤 날짜의 일정인가요</that>
+        <template>
+            <think>
+                <set name = "month">this</set>
+                <set name = "date"><map name = "date2num"><star index = "2"></star></map></set>
+            </think>
+            <srai>ANSWER DATE</srai>
+        </template>
+    </category>
+    
+    <category>
+        <pattern> * <set>day</set> ^</pattern>
+        <that>어떤 날짜의 일정인가요</that>
+        <template>
+            <think>
+                <set name = "week"><map name = "this2week"><star index = "1"></star></map></set>
+                <set name = "day"><map name = "day2num"><star index = "2"></star></map></set>
+            </think>
+            <srai>ANSWER DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern><set>day</set> ^</pattern>
+        <that>어떤 날짜의 일정인가요</that>
+        <template>
+            <think>
+                <set name = "week">this</set>
+                <set name = "day"><map name = "day2num"><star index = "2"></star></map></set>
+            </think>
+            <srai>ANSWER DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ANSWER START TIME</pattern>
+        <that>시작 시간을 설정하시겠어요</that>
+        <template>종료 시간을 설정하시겠어요?</template>
+    </category>
+
+    <category>
+        <pattern><set>hour</set> ^</pattern>
+        <that>시작 시간을 설정하시겠어요</that>
+        <template>
+            <think>
+                <set name = "starthour"><map name = "hour2num"><star/></map></set>
+                <set name = "startminute">0</set>
+            </think>
+            <srai>ANSWER START TIME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern> * <set>minute</set> ^</pattern>
+        <that>시작 시간을 설정하시겠어요</that>
+        <template>
+            <think>
+                <set name = "starthour"><map name = "hour2num"><star index = "1"></star></map></set>
+                <set name = "startminute"><map name = "minute2num"><star index = "2"></star></map></set>
+            </think>
+            <srai>ANSWER START TIME</srai>
+        </template>
+    </category>
+
+    <category>
+            <pattern>ANSWER START TIME ALLDAY</pattern>
+            <that>시작 시간을 설정하시겠어요</that>
+            <template>일정 제목을 적어주세요</template>
+        </category>
+
+    <category>
+        <pattern>^ 아니 ^</pattern>
+        <that>시작 시간을 설정하시겠어요</that>
+        <template>
+            <think>
+                <set name = "starthour">ALLDAY</set>
+            </think>
+            <srai>ANSWER START TIME ALLDAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ANSWER END TIME</pattern>
+        <that>종료 시간을 설정하시겠어요</that>
+        <template>일정 제목을 적어주세요</template>
+    </category>
+
+    <category>
+        <pattern><set>hour</set> ^</pattern>
+        <that>종료 시간을 설정하시겠어요</that>
+        <template>
+            <think>
+                <set name = "endhour"><map name = "hour2num"><star/></map></set>
+                <set name = "endminute">0</set>
+            </think>
+            <srai>ANSWER END TIME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern> * <set>minute</set> ^</pattern>
+        <that>종료 시간을 설정하시겠어요</that>
+        <template>
+            <think>
+                <set name = "endhour"><map name = "hour2num"><star index = "1"></star></map></set>
+                <set name = "endminute"><map name = "minute2num"><star index = "2"></star></map></set>
+            </think>
+            <srai>ANSWER END TIME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>아니 ^</pattern>
+        <that>종료 시간을 설정하시겠어요</that>
+        <template><srai>ANSWER END TIME</srai></template>
+    </category>
+
+    <category>
+        <pattern>ANSWER TITLE</pattern>
+        <that>일정 제목을 적어주세요</that>
+        <template>일정을 등록했어요! 알림을 해드릴까요?</template>
+    </category>
+
+    <category>
+        <pattern> * </pattern>
+        <that>일정 제목을 적어주세요</that>
+        <template>
+            <think>
+                <set name = "title"><star/></set>
+            </think>
+            <srai>ANSWER TITLE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>응 ^</pattern>
+        <that>알림을 해드릴까요</that>
+        <template>그럼 시작하는 시간에 알려 드릴게요!$<think><set name = "notihour"><get name = "starthour"/></set><set name = "notiminute"><get name = "startminute"/></set></think><srai>COMPLETE SCHEDULE</srai></template>
+    </category>
+    
+    <category>
+        <pattern>아니 ^</pattern>
+        <that>알림을 해드릴까요</that>
+        <template>알림은 필요 없으시군요.$<srai>COMPLETE SCHEDULE</srai></template>
+    </category>
+    
+    <category>
+        <pattern><set>hour</set> ^</pattern>
+        <that>알림을 해드릴까요</that>
+        <template>
+            그럼 <star/> 전에 알려 드릴게요!$<think><set name = "notihour"><map name = "hour2num"><star/></map></set><set name = "notiminute">0</set></think><srai>COMPLETE SCHEDULE</srai></template>
+    </category>
+    
+    <category>
+        <pattern><set>minute</set> ^ </pattern>
+        <that>알림을 해드릴까요</that>
+        <template>그럼 <star/> 전에 알려 드릴게요!$<think><set name = "notihour">0</set><set name = "notiminute"><map name = "minute2num"><star/></map></set></think><srai>COMPLETE SCHEDULE</srai> </template>
+    </category>
+    
+    <category>
+        <pattern> * <set>minute</set> ^ </pattern>
+        <that>알림을 해드릴까요</that>
+        <template>그럼 <star index = "1"/> <star index = "2"/> 전에 알려 드릴게요!$<think><set name = "notihour"><map name = "hour2num"><star index = "1"/></map></set><set name = "notiminute"><map name = "minute2num"><star index = "2"/></map></set></think><srai>COMPLETE SCHEDULE</srai></template>
+    </category>
+
+    <category>
+        <pattern>COMPLETE SCHEDULE</pattern>
+        <template>OOB/SCHEDULE/<get name = "month"/>/<get name = "date"/>/<get name = "day"/>/<get name = "week"/>/<get name = "starthour"/>/<get name = "startminute"/>/<get name = "endhour"/>/<get name = "endminute"/>/<get name = "title"/>/<get name = "notihour"/>/<get name = "notiminute"/></template>
+    </category>
+    
+</topic>
+  
+</aiml>
