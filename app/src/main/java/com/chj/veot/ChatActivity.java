@@ -94,12 +94,24 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void BotMessage(String usertext) {                  // bot response를 화면에 띄우기
-        String response = mBotProcessor.response(usertext);
-        ChatMessage message = new ChatMessage(response, false);
+        String [] bot = mBotProcessor.response(usertext);
+        for(String response : bot) {
+            if(response != null) {
+                ChatMessage message = new ChatMessage(response, false);
+                mMessageList.add(message);
+                mChatAdapter.notifyDataSetChanged();
+                mRecyclerView.scrollToPosition(mMessageList.size() - 1);
+
+                Log.v("request bot message", response);
+            }
+        }
+    }
+    public void pushBotMessage(String botText) {
+        ChatMessage message = new ChatMessage(botText, false);
         mMessageList.add(message);
         mChatAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(mMessageList.size() - 1);
 
-        Log.v("request bot message", response);
+        Log.v("push bot message", botText);
     }
 }

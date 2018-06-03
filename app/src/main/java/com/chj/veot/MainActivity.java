@@ -24,14 +24,12 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    CollapsingToolbarLayout mCollapsToolbar;
     FloatingActionButton mFAB;
     CalendarView mCalendarView;
     TextView mTodayBtn;
     RecyclerView mRecyclerView;
 
     EventAdapter mEventAdapter;
-    CalendarProvider mCalendarProvider;
     Calendar selectedDate;
 
     @Override
@@ -52,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
         selectedDate.set(Calendar.HOUR_OF_DAY,0);
         selectedDate.set(Calendar.MINUTE,0);
 
-        mCalendarProvider = new CalendarProvider(this);
-        //mCalendarProvider.addTestData();
+        //CalendarProvider.getStaticInstance(this).addTestData();
+        CalendarResolver.getStaticInstance(this).deleteAll();
+        CalendarResolver.getStaticInstance(this).checkEventList();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         mRecyclerView.getRecycledViewPool().clear();

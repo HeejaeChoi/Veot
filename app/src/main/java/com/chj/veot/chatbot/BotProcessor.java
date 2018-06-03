@@ -19,6 +19,8 @@ import java.io.OutputStream;
 
 import android.util.Log;
 
+import com.chj.veot.ChatActivity;
+
 
 public class BotProcessor {
     String botName = "Veot";
@@ -27,7 +29,7 @@ public class BotProcessor {
     private Chat chat;
 
     String request;
-    String response;
+    String[] response;
 
     Context context;
 
@@ -41,13 +43,14 @@ public class BotProcessor {
         request = message;
     }
 
-    public String response(String usertext) {
-        response = chat.multisentenceRespond(usertext);
-        OOBProcessor oob = new OOBProcessor(response, context);
+    public String[] response(String usertext) {
+        response = new String[2];
+        response[0] = chat.multisentenceRespond(usertext);
+        OOBProcessor oob = new OOBProcessor(response[0], context);
         if (request != null) {
             if (oob.checkOOB()) {
-                response = oob.OOBAction();
-                response(oob.OOBActionRequest());
+                response[0] = oob.OOBAction();
+                response[1] = actionResponse(oob.OOBActionRequest());
                 return response;
             }
             else {
@@ -55,6 +58,11 @@ public class BotProcessor {
             }
         }
         return null;
+    }
+
+    public String actionResponse(String botText) {
+        String bot = chat.multisentenceRespond(botText);
+        return bot;
     }
 
     public void setBotProcessor() {

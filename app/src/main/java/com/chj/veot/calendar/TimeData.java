@@ -33,7 +33,7 @@ public class TimeData {
 
     public TimeData(Calendar calendar) {
         this.date = calendar.get(Calendar.DATE);
-        this.month = calendar.get(Calendar.MONTH);
+        this.month = calendar.get(Calendar.MONTH) + 1;
         this.year = calendar.get(Calendar.YEAR);
         this.hour = calendar.get(Calendar.HOUR_OF_DAY);
         this.minute = calendar.get(Calendar.MINUTE);
@@ -129,6 +129,12 @@ public class TimeData {
     public String getTimeString() {
         String time = "";
         time = getHourString() + " : " + getMinuteString();
+        return time;
+    }
+
+    public String getTimeDataString() {
+        String time = "";
+        time = this.year + "/" + this.month + "/" + this.date + " " + getHourString() + " : " + getMinuteString();
         return time;
     }
 

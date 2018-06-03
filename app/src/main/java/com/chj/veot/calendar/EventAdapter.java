@@ -36,17 +36,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         this.context = context;
         this.viewDate = date;
         this.mDataset = new ArrayList<Event>();
-        this.mDataset = new CalendarResolver(context).getEventsOnDate(new TimeData(viewDate));
+        this.mDataset = CalendarResolver.getStaticInstance(context).getEventsOnDate(new TimeData(viewDate));
         Log.v("event adapter ",  "event list " + mDataset.size());
-        notifyItemRangeRemoved(0, mDataset.size());
+        //notifyItemRangeRemoved(0, mDataset.size());
     }
 
     public EventAdapter setViewDate(Calendar date) {
         this.viewDate = date;
         this.mDataset = new ArrayList<Event>();
-        this.mDataset = new CalendarResolver(context).getEventsOnDate(new TimeData(viewDate));
+        this.mDataset = CalendarResolver.getStaticInstance(context).getEventsOnDate(new TimeData(viewDate));
         Log.v("event adapter ",  "event list " + mDataset.size());
-        notifyItemRangeRemoved(0, mDataset.size());
+        //notifyItemRangeRemoved(0, mDataset.size());
         return this;
     }
 

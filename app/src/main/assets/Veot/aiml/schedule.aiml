@@ -179,7 +179,7 @@
     </category>
 
     <category>
-        <pattern> * </pattern>
+        <pattern>*</pattern>
         <that>일정 제목을 적어주세요</that>
         <template>
             <think>
@@ -192,37 +192,37 @@
     <category>
         <pattern>응 ^</pattern>
         <that>알림을 해드릴까요</that>
-        <template>그럼 시작하는 시간에 알려 드릴게요!$<think><set name = "notihour"><get name = "starthour"/></set><set name = "notiminute"><get name = "startminute"/></set></think><srai>COMPLETE SCHEDULE</srai></template>
+        <template>그럼 시작하는 시간에 알려 드릴게요!<think><set name = "notihour"><get name = "starthour"/></set><set name = "notiminute"><get name = "startminute"/></set></think><srai>COMPLETE SCHEDULE</srai></template>
     </category>
     
     <category>
         <pattern>아니 ^</pattern>
         <that>알림을 해드릴까요</that>
-        <template>알림은 필요 없으시군요.$<srai>COMPLETE SCHEDULE</srai></template>
+        <template>알림은 필요 없으시군요.<srai>COMPLETE SCHEDULE</srai></template>
     </category>
     
     <category>
         <pattern><set>hour</set> ^</pattern>
         <that>알림을 해드릴까요</that>
         <template>
-            그럼 <star/> 전에 알려 드릴게요!$<think><set name = "notihour"><map name = "hour2num"><star/></map></set><set name = "notiminute">0</set></think><srai>COMPLETE SCHEDULE</srai></template>
+            그럼 <star/> 전에 알려 드릴게요!<think><set name = "notihour"><map name = "hour2num"><star/></map></set><set name = "notiminute">0</set></think><srai>COMPLETE SCHEDULE</srai></template>
     </category>
     
     <category>
         <pattern><set>minute</set> ^ </pattern>
         <that>알림을 해드릴까요</that>
-        <template>그럼 <star/> 전에 알려 드릴게요!$<think><set name = "notihour">0</set><set name = "notiminute"><map name = "minute2num"><star/></map></set></think><srai>COMPLETE SCHEDULE</srai> </template>
+        <template>그럼 <star/> 전에 알려 드릴게요!<think><set name = "notihour">0</set><set name = "notiminute"><map name = "minute2num"><star/></map></set></think><srai>COMPLETE SCHEDULE</srai> </template>
     </category>
     
     <category>
         <pattern> * <set>minute</set> ^ </pattern>
         <that>알림을 해드릴까요</that>
-        <template>그럼 <star index = "1"/> <star index = "2"/> 전에 알려 드릴게요!$<think><set name = "notihour"><map name = "hour2num"><star index = "1"/></map></set><set name = "notiminute"><map name = "minute2num"><star index = "2"/></map></set></think><srai>COMPLETE SCHEDULE</srai></template>
+        <template>그럼 <star index = "1"/> <star index = "2"/> 전에 알려 드릴게요!<think><set name = "notihour"><map name = "hour2num"><star index = "1"/></map></set><set name = "notiminute"><map name = "minute2num"><star index = "2"/></map></set></think><srai>COMPLETE SCHEDULE</srai></template>
     </category>
 
     <category>
         <pattern>COMPLETE SCHEDULE</pattern>
-        <template>OOB/SCHEDULE/<get name = "month"/>/<get name = "date"/>/<get name = "day"/>/<get name = "week"/>/<get name = "starthour"/>/<get name = "startminute"/>/<get name = "endhour"/>/<get name = "endminute"/>/<get name = "title"/>/<get name = "notihour"/>/<get name = "notiminute"/></template>
+        <template>OOB#SCHEDULE#<get name = "month"/>#<get name = "date"/>#<get name = "day"/>#<get name = "week"/>#<get name = "starthour"/>#<get name = "startminute"/>#<get name = "endhour"/>#<get name = "endminute"/>#<get name = "title"/>#<get name = "notihour"/>#<get name = "notiminute"/></template>
     </category>
     
 </topic>

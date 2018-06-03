@@ -3,6 +3,7 @@ package com.chj.veot.chatbot;
 import android.content.Context;
 import android.util.Log;
 
+import com.chj.veot.calendar.CalendarProvider;
 import com.chj.veot.calendar.CalendarResolver;
 import com.chj.veot.calendar.Diary;
 import com.chj.veot.calendar.Event;
@@ -29,7 +30,8 @@ public class OOBProcessor {
 
     public boolean checkOOB() {
         if (response.contains("OOB")) {
-            process = response.trim().split("\\/");
+            process = response.split("\\#");
+            Log.v("OOB check ", response);
             return true;
         } else return false;
     }
@@ -63,7 +65,7 @@ public class OOBProcessor {
         private TimeData start, end;
 
         private ScheduleAction() {
-            Log.v("oob : ", "schedule action");
+            Log.v("oob ", "schedule action");
             listener();
             setTimeData();
             setEvent();
@@ -80,13 +82,14 @@ public class OOBProcessor {
             event.setStartTime(start);
             event.setEndTime(end);
             event.setAllDay(String.valueOf(allday));
+            event.setTitle(title);
 
-            long id = mCalendarResolver.addEvent(event);
-            Log.v("oob : ", "schedule action - setEvent");
+            long id = CalendarProvider.getStaticInstance(context).addEvent(event);
+            Log.v("oob ", "schedule action - setEvent");
 
             if (notihour != 0 && notiminute != 0) {
                 int noti_in_minute = (notihour * 60) + notiminute;
-                mCalendarResolver.setEventReminder(id, noti_in_minute);
+                CalendarProvider.getStaticInstance(context).setEventReminder(id, noti_in_minute);
             }
         }
 
@@ -194,7 +197,7 @@ public class OOBProcessor {
 
 
         private SearchAction() {
-            Log.v("oob : ", "search action");
+            Log.v("oob ", "search action");
             listener();
             setTimeData();
             searchEvent();
@@ -209,7 +212,7 @@ public class OOBProcessor {
                 count++;
             }
             newResponse = count + "개의 일정을 찾았어요." + sb.toString();
-            Log.v("oob : ", "search action - search event");
+            Log.v("oob ", "search action - search event");
         }
 
         private void setTimeData() {
@@ -296,7 +299,7 @@ public class OOBProcessor {
         private TimeData today;
 
         private DiaryAction() {
-            Log.v("oob : ", "diary action");
+            Log.v("oob ", "diary action");
             listener();
             setTimeData();
             setDiary();
@@ -313,9 +316,9 @@ public class OOBProcessor {
             Diary good = new Diary("GOOD", goodtimes);
             good.setDate(today);
 
-            mCalendarResolver.addDiary(hard);
-            mCalendarResolver.addDiary(good);
-            Log.v("oob : ", "diary action - set diary");
+            CalendarProvider.getStaticInstance(context).addDiary(hard);
+            CalendarProvider.getStaticInstance(context).addDiary(good);
+            Log.v("oob ", "diary action - set diary");
         }
 
         private void setTimeData() {

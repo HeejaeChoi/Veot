@@ -67,8 +67,13 @@ public class Event {
         return startTime;
     }
     public String getStartTimeString() {
-        TimeData data = new TimeData(Long.parseLong(startTime));
+        TimeData data = new TimeData(Long.parseLong(this.startTime));
         String time = data.getTimeString();
+        return time;
+    }
+    public String getStartTimeDataString() {
+        TimeData data = new TimeData(Long.parseLong(this.startTime));
+        String time = data.getTimeDataString();
         return time;
     }
     public void setStartTime(String time) {
@@ -82,8 +87,13 @@ public class Event {
         return endTime;
     }
     public String getEndTimeString() {
-        TimeData data = new TimeData(Long.parseLong(endTime));
+        TimeData data = new TimeData(Long.parseLong(this.endTime));
         String time = data.getTimeString();
+        return time;
+    }
+    public String getEndTimeDataString() {
+        TimeData data = new TimeData(Long.parseLong(this.endTime));
+        String time = data.getTimeDataString();
         return time;
     }
     public void setEndTime(String time) {
